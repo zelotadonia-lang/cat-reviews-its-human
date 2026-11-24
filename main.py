@@ -1,31 +1,25 @@
-"""Cat Reviews Its Human (entry).
+"""Cat Reviews Its Human — make.fun bounty entry (rev2).
 
-Writes one one-star review to /output/entry.txt.
-
-The review: the cat's human closes the bathroom door, and the cat
-measures the offence by cat standards — it pays rent in dead mice, so
-a closed door is an insult from a tenant who contributes nothing.
+Writes one one-star review from a house cat about its human owner
+to /output/entry.txt.
 """
 
 import os
 
 REVIEW = (
-    "One star. He closes the bathroom door like I don't pay rent in dead mice."
+    "One star. He types all day on a warm rectangle. I sat on it. "
+    "He moved me. Now his email says only the letter m."
 )
 
 
 def main() -> None:
-    # The gate only accepts UTF-8 text of 1-200 characters, not whitespace
-    # only. Check here so a bad review fails loudly at build time instead
-    # of silently scoring 0 after submission.
+    # Gate: bounty entries must be between 1 and 200 characters.
     if not 1 <= len(REVIEW) <= 200:
         raise ValueError(
-            f"review must be 1-200 characters, got {len(REVIEW)}"
+            "REVIEW must be 1-200 characters, got %d" % len(REVIEW)
         )
-    if not REVIEW.strip():
-        raise ValueError("review must not be only whitespace")
     os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8", newline="") as f:
+    with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(REVIEW)
 
 
